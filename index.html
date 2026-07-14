@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore Tanahun, Nepal — hilltop heritage towns, sacred river confluences, mountain views, festivals, and adventure between the Seti and Madi rivers in Gandaki Province.">
+  <meta name="theme-color" content="#B3202A">
+  <meta name="author" content="Tanahun Tourism">
+  
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tanahun-explore.local/">
+  <meta property="og:title" content="Tanahun - Wander the Hills Between the Rivers">
+  <meta property="og:description" content="Discover heritage, culture, festivals, and adventure in Tanahun, Gandaki Province, Nepal.">
+  <meta property="og:image" content="https://via.placeholder.com/1200x630?text=Tanahun+District">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tanahun - Wander the Hills Between the Rivers">
+  <meta name="twitter:description" content="Explore heritage sites, festivals, and natural beauty in Tanahun, Nepal.">
+  <meta name="twitter:image" content="https://via.placeholder.com/1200x630?text=Tanahun+District">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23B3202A'>🏔️</text></svg>">
+  
+  <!-- Preconnect to fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <title>Tanahun - Wander the Hills Between the Rivers</title>
+</head>
+
+<body>
+
+<!-- Navigation Bar -->
+<div class="topbar" id="topbar" role="navigation" aria-label="Main navigation">
+  <div class="logo">
+    <span aria-label="Tanahun">Tanahun</span>
+  </div>
+  <button class="passport-btn" id="openPassport" aria-label="Open Tanahun Passport (View visited places)">
+    📖 Passport <span class="passport-count" id="passportCount" aria-live="polite">0</span>
+  </button>
+</div>
+
+<!-- Hero Section -->
+<section class="hero" aria-label="Hero section">
+  <div class="hero-bg"></div>
+  <div class="bunting" id="bunting" aria-hidden="true"></div>
+  <div class="drift" style="top:18%; font-size:22px; animation-duration:10s;" aria-hidden="true">🦅</div>
+  <div class="drift" style="top:30%; font-size:16px; animation-duration:15s; animation-delay:1s;" aria-hidden="true">🪁</div>
+  <div class="drift" style="top:45%; font-size:14px; animation-duration:15s; animation-delay:1s;" aria-hidden="true">🍃</div>
+  
+  <svg class="hills" viewBox="0 0 1440 320" preserveAspectRatio="none" style="height:36vh;" aria-hidden="true">
+    <path fill="#7a2e3d" d="M0,192L120,181.3C240,171,480,149,720,160C960,171,1200,213,1320,234.7L1440,256L1440,320L0,320Z"></path>
+    <path fill="#5B2C6F" d="M0,256L160,240C320,224,640,192,960,197.3C1280,203,1440,235,1440,235L1440,320L0,320Z" opacity="0.9"></path>
+  </svg>
+  
+  <div class="hero-overlay"></div>
+  
+  <div class="hero-content">
+    <div class="eyebrow">Gandaki Province · Nepal</div>
+    <h1>TANAHUN</h1>
+    <p class="tagline">Vyas Bhumi, home to Adi Kabi Bhanubhakta. Terraced hills, deep valleys, two rivers, ancient temples, hilltop bazaars, and a calendar full of festivals and dance.</p>
+  </div>
+  
+  <div class="scroll-cue" aria-label="Scroll down to explore">
+    <span>Scroll to wander</span>
+    <div class="line"></div>
+  </div>
+</section>
+
+<!-- Places Carousel Section -->
+<section class="section" id="places" aria-label="Featured Places">
+  <div class="section-head">
+    <div class="kicker">The Front Porch</div>
+    <h2>Places that make Tanahun, Tanahun</h2>
+    <p>Tap a place for the full history, culture, festivals, where to stay, and what's nearby.</p>
+  </div>
+  
+  <div class="carousel-wrap" id="carouselWrap" role="region" aria-label="Place carousel">
+    <div class="carousel-track" id="carousel" role="list"></div>
+  </div>
+  
+  <div class="carousel-controls">
+    <button id="prevBtn" aria-label="Previous place">←</button>
+    <button class="play-pill" id="playPause" aria-label="Toggle carousel autoplay">⏸ Pause</button>
+    <button id="nextBtn" aria-label="Next place">→</button>
+  </div>
+</section>
+
+<!-- Culture & Festivals Section -->
+<section class="culture-band" aria-label="Festivals and Dances">
+  <div class="section-head">
+    <div class="kicker">Living Traditions</div>
+    <h2>Festivals &amp; Dances of Tanahun</h2>
+    <p>Tanahun's ridges and riverbanks come alive year-round with festivals and folk dances carried by Magar, Gurung, Brahmin, and Chhetri communities alike.</p>
+  </div>
+  <div class="culture-grid" id="cultureGrid" role="list"></div>
+</section>
+
+<!-- Mood Filter Section -->
+<section class="section" id="mood" aria-label="Find places by mood">
+  <div class="section-head">
+    <div class="kicker">Not Sure Where to Start?</div>
+    <h2>Tell us your mood</h2>
+    <p>Pick a feeling — we'll point you toward the right ridge, river, or ruin.</p>
+  </div>
+  <div class="mood-row" id="moodRow" role="group" aria-label="Mood selection"></div>
+  <div id="moodResult" role="region" aria-live="polite" aria-label="Mood results"></div>
+</section>
+
+<!-- Info Strip -->
+<div class="info-strip" aria-label="Tanahun statistics">
+  <div class="stat">
+    <h3>8+</h3>
+    <p>Signature places to explore</p>
+  </div>
+  <div class="stat">
+    <h3>184–2134m</h3>
+    <p>Elevation range, plains to hilltop</p>
+  </div>
+  <div class="stat">
+    <h3>2</h3>
+    <p>Major rivers carving the valley — Seti &amp; Madi</p>
+  </div>
+  <div class="stat">
+    <h3>49km</h3>
+    <p>From Damauli to Pokhara</p>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  Built as a wandering-friendly prototype for Tanahun district tourism · 
+  <a href="#" title="View on GitHub">Source on GitHub</a>
+</footer>
+
+<!-- Modal / Place Detail -->
+<div class="modal-backdrop" id="modalBackdrop" role="presentation">
+  <div class="modal" id="modalContent" role="dialog" aria-modal="true" aria-labelledby="modalTitle"></div>
+</div>
+
+<!-- Passport Modal -->
+<div class="passport-backdrop" id="passportBackdrop" role="presentation">
+  <div class="passport-book" role="dialog" aria-modal="true" aria-labelledby="passportTitle">
+    <button class="modal-close" id="closePassport" aria-label="Close passport">✕</button>
+    <div class="passport-title">
+      <span class="mark" aria-hidden="true">🛂</span>
+      <h2 id="passportTitle">Tanahun Passport</h2>
+    </div>
+    <div class="passport-sub" id="passportSub">Visit places (in the app) to collect their stamp.</div>
+    <div class="passport-progress" aria-label="Progress">
+      <div class="passport-progress-fill" id="progressFill" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+    </div>
+    <div class="stamp-grid" id="stampGrid" role="list"></div>
+    <div class="passport-empty-note" id="passportNote">No stamps yet — open a place and tap "Stamp my passport".</div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="data.js"></script>
+<script src="script.js"></script>
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TouristDestination",
+  "name": "Tanahun District",
+  "description": "Explore heritage, culture, festivals, and adventure in Tanahun, Gandaki Province, Nepal.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "NP",
+    "addressRegion": "Gandaki Province",
+    "addressLocality": "Tanahun"
+  },
+  "geo": {
+    "@type": "GeoShape",
+    "box": "27.97 84.27 28.25 85.04"
+  },
+  "url": "https://tanahun-explore.local/",
+  "image": "https://via.placeholder.com/1200x630?text=Tanahun+District"
+}
+</script>
+
+</body>
+</html>
