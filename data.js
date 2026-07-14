@@ -27,7 +27,7 @@ const PLACES = [
   {
     id: "devghat",
     grad: "linear-gradient(160deg, #2e9aa8, #173a40)",
-    img: "images/namuna.jpeg",
+    img: "images/devghat.jpeg",
     fallbackImg: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%232e9aa8' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='24' fill='%23fff' text-anchor='middle' dominant-baseline='central'%3EDevghat%3C/text%3E%3C/svg%3E",
     tag: "Sacred River Confluence",
     name: "Devghat",
@@ -86,7 +86,7 @@ const PLACES = [
   {
     id: "chhimkeshwari",
     grad: "linear-gradient(160deg, #a8406a, #3a1428)",
-    img: "images/namuna.jpeg",
+    img: "images/chhimkeshwori.jpeg",
     fallbackImg: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23a8406a' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='24' fill='%23fff' text-anchor='middle' dominant-baseline='central'%3EChhimkeshwari%3C/text%3E%3C/svg%3E",
     tag: "Pagoda on the Ridge",
     name: "Chhimkeshwari Temple",
@@ -105,7 +105,7 @@ const PLACES = [
   {
     id: "chhabdibarahi",
     grad: "linear-gradient(160deg, #c9962e, #4a3410)",
-    img: "images/namuna.jpeg",
+    img: "images/chabdi.jpeg",
     fallbackImg: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23c9962e' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='24' fill='%23fff' text-anchor='middle' dominant-baseline='central'%3EChhabdi Barahi%3C/text%3E%3C/svg%3E",
     tag: "Historic Magar Site",
     name: "Chhabdi Barahi Temple",
@@ -124,7 +124,7 @@ const PLACES = [
   {
     id: "damauli",
     grad: "linear-gradient(160deg, #3a6ac9, #12183a)",
-    img: "images/namuna.jpeg",
+    img: "images/damauli.jpeg",
     fallbackImg: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%233a6ac9' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='24' fill='%23fff' text-anchor='middle' dominant-baseline='central'%3EDamauli%3C/text%3E%3C/svg%3E",
     tag: "District Headquarters",
     name: "Damauli Bazaar",
@@ -144,7 +144,7 @@ const PLACES = [
   {
     id: "setirafting",
     grad: "linear-gradient(160deg, #128A8C, #0a2e30)",
-    img: "images/namuna.jpeg",
+    img: "images/rafting.webp",
     fallbackImg: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23128A8C' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='24' fill='%23fff' text-anchor='middle' dominant-baseline='central'%3ESeti %26 Madi Rivers%3C/text%3E%3C/svg%3E",
     tag: "Whitewater & Camps",
     name: "Seti & Madi Rivers",
