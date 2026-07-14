@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tanahun - Wander the Hills Between the Rivers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --saffron:#E8871E;
+  --marigold:#F4B400;
+  --maroon:#B3202A;
+  --magenta:#C6316B;
+  --teal:#128A8C;
+  --purple:#850303;
+  --cream:#FFF7E8;
+  --ink:#2B1B10;
+  --stamp:#B3202A;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; font-family:'Poppins', sans-serif; background:var(--cream); color:var(--ink); overflow-x:hidden;
+}
+h1,h2,h3,.display{font-family:'Baloo 2', sans-serif;}
+
+/* bunting texture backdrop */
+body{
+  background-image:
+    radial-gradient(circle at 10% 5%, rgba(198,49,107,0.06), transparent 35%),
+    radial-gradient(circle at 90% 15%, rgba(18,138,140,0.08), transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(232,135,30,0.06), transparent 45%);
+}
+
+/* ---------- NAV ---------- */
+.topbar{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 28px;
+  background:linear-gradient(to bottom, rgba(43,27,16,0.6), transparent);
+  transition:background .3s;
+}
+.topbar.solid{ background:var(--cream); box-shadow:0 2px 14px rgba(0,0,0,0.1); }
+.logo{
+  font-weight:700; font-size:1.4rem; color:#fff; letter-spacing:0.5px;
+  display:flex; align-items:center; gap:8px;
+}
+.topbar.solid .logo{ color:var(--maroon); }
+.logo .mark{ font-size:1.6rem; }
+.passport-btn{
+  display:flex; align-items:center; gap:8px;
+  background:var(--marigold); color:var(--ink); border:none;
+  padding:9px 18px; border-radius:999px; font-weight:700; font-size:0.85rem;
+  cursor:pointer; box-shadow:0 3px 0 #b8820a; transition:transform .15s;
+}
+.passport-btn:active{ transform:translateY(2px); box-shadow:0 1px 0 #b8820a; }
+.passport-count{
+  background:var(--maroon); color:#fff; border-radius:50%;
+  width:20px; height:20px; display:flex; align-items:center; justify-content:center; font-size:0.7rem;
+}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative; height:100vh; min-height:640px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; color:#fff; overflow:hidden;
+}
+.hero-bg{
+  position:absolute; inset:0; z-index:0;
+  background:
+    linear-gradient(160deg, var(--purple) 0%, var(--magenta) 32%, var(--saffron) 65%, var(--marigold) 100%);
+}
+.hero-bg::after{
+  content:""; position:absolute; inset:0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.18) 2px, transparent 2.5px);
+  background-size: 46px 46px;
+  opacity:0.5;
+}
+.bunting{ position:absolute; top:0; left:0; width:100%; z-index:2; display:flex; justify-content:space-evenly; }
+.bunting .flag{ width:26px; height:34px; margin-top:-4px; clip-path:polygon(0 0,100% 0,50% 100%); }
+.hills{ position:absolute; bottom:0; left:0; width:100%; z-index:1; }
+.hero-overlay{
+  position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,10,10,0.05) 0%, rgba(20,10,10,0.55) 100%);
+  z-index:1;
+}
+.hero-content{ position:relative; z-index:3; padding:0 20px; }
+.eyebrow{
+  font-size:0.85rem; letter-spacing:3px; text-transform:uppercase; opacity:0.95; margin-bottom:14px; font-weight:700;
+  background:rgba(0,0,0,0.2); display:inline-block; padding:6px 16px; border-radius:999px;
+}
+.hero h1{
+  font-size:clamp(3.2rem, 10vw, 7rem); margin:0; line-height:0.95; font-weight:800;
+  text-shadow:0 6px 26px rgba(0,0,0,0.35); letter-spacing:1px;
+}
+.hero p.tagline{
+  font-size:clamp(1rem,2vw,1.3rem); max-width:580px; margin:20px auto 0; font-weight:500; opacity:0.97;
+}
+.scroll-cue{
+  position:absolute; bottom:28px; left:50%; transform:translateX(-50%); z-index:3;
+  color:#fff; font-size:0.75rem; letter-spacing:2px; text-transform:uppercase;
+  display:flex; flex-direction:column; align-items:center; gap:8px; opacity:0.9;
+}
+.scroll-cue .line{ width:1px; height:34px; background:#fff; animation:pulse 2s infinite; }
+@keyframes pulse{ 0%,100%{opacity:0.3;} 50%{opacity:1;} }
+
+.drift{ position:absolute; z-index: 9; opacity:1; animation:driftmove linear infinite; }
+
+@keyframes driftmove{ from{transform:translateX(0px) translateY(0px);} to{transform:translateX(100px) translateY(20px);} }
+
+/* ---------- SECTION HEADERS ---------- */
+.section{ padding:80px 6vw; max-width:1440px; margin:0 auto; }
+.section-head{ margin-bottom:36px; max-width:660px; }
+.section-head .kicker{
+  color:var(--maroon); font-weight:700; letter-spacing:2px; text-transform:uppercase; font-size:0.8rem;
+}
+.section-head h2{ font-size:clamp(1.9rem,3.6vw,2.7rem); margin:8px 0 10px; color:var(--purple); }
+.section-head p{ color:#5a4433; line-height:1.6; }
+
+/* ---------- INFINITE CAROUSEL ---------- */
+.carousel-wrap{ position:relative; overflow:hidden; padding:10px 0 26px; }
+.carousel-wrap::before, .carousel-wrap::after{
+  content:""; position:absolute; top:0; bottom:0; width:60px; z-index:5; pointer-events:none;
+}
+.carousel-wrap::before{ left:0; background:linear-gradient(90deg, var(--cream), transparent); }
+.carousel-wrap::after{ right:0; background:linear-gradient(270deg, var(--cream), transparent); }
+.carousel-track{ display:flex; gap:22px; width:max-content; }
+.place-card{
+  flex:0 0 300px; height:390px; position:relative;
+  border-radius:20px; overflow:hidden; cursor:pointer; color:#fff;
+  box-shadow:0 10px 30px rgba(90,20,20,0.2); transition:transform .3s, box-shadow .3s;
+  border:3px solid var(--cream);
+}
+.place-card:hover{ transform:translateY(-8px) rotate(-0.5deg); box-shadow:0 18px 34px rgba(90,20,20,0.3); }
+.place-img{ position:absolute; inset:0; }
+.place-grad{ position:absolute; inset:0; background:linear-gradient(180deg, transparent 40%, rgba(20,10,10,0.9) 100%); }
+.place-info{ position:absolute; bottom:0; left:0; right:0; padding:20px; }
+.place-tag{
+  display:inline-block; background:rgba(255,255,255,0.22); backdrop-filter:blur(4px);
+  padding:3px 10px; border-radius:999px; font-size:0.68rem; letter-spacing:1px; text-transform:uppercase; margin-bottom:8px; font-weight:600;
+}
+.place-info h3{ margin:0 0 4px; font-size:1.45rem; }
+.place-info p{ margin:0; font-size:0.85rem; opacity:0.92; }
+.stamped-badge{
+  position:absolute; top:14px; right:14px; width:46px; height:46px; border-radius:50%;
+  border:2.5px dashed var(--stamp); color:var(--stamp); background:rgba(255,255,255,0.9);
+  display:flex; align-items:center; justify-content:center; font-size:1.4rem; font-weight:700;
+  transform:rotate(-12deg); opacity:0; transition:opacity .3s; font-family:'Caveat',cursive;
+}
+.stamped-badge.show{ opacity:1; }
+.carousel-controls{ display:flex; align-items:center; justify-content:center; gap:16px; margin-top:6px; }
+.carousel-controls button{
+  width:42px; height:42px; border-radius:50%; border:2px solid var(--maroon); background:var(--cream);
+  color:var(--maroon); cursor:pointer; font-size:1.1rem; transition:all .2s;
+}
+.carousel-controls button:hover{ background:var(--maroon); color:#fff; }
+.play-pill{
+  border:none; background:var(--purple); color:#fff; padding:8px 18px; border-radius:999px;
+  font-weight:600; font-size:0.82rem; cursor:pointer; display:flex; align-items:center; gap:6px;
+}
+
+/* ---------- CULTURE / FESTIVAL SECTION ---------- */
+.culture-band{ background:var(--purple); padding:80px 6vw; }
+.culture-band .section-head h2{ color:#fff; }
+.culture-band .section-head p{ color:#e5d6ef; }
+.culture-band .kicker{ color:var(--marigold); }
+.culture-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:22px; }
+.culture-card{
+  background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.18); border-radius:18px;
+  overflow:hidden; color:#fff; cursor:pointer; transition:transform .25s, background .25s;
+}
+.culture-card:hover{ transform:translateY(-6px); background:rgba(255,255,255,0.14); }
+.culture-thumb{ height:140px; display:flex; align-items:center; justify-content:center; font-size:3rem; }
+.culture-body{ padding:16px 18px 20px; }
+.culture-body .ctag{
+  font-size:0.68rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--marigold); font-weight:700; margin-bottom:6px; display:block;
+}
+.culture-body h3{ margin:0 0 8px; font-size:1.2rem; }
+.culture-body p{ margin:0; font-size:0.87rem; line-height:1.55; color:#e9ddf0; }
+
+/* ---------- MOOD ---------- */
+.mood-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top:18px; }
+.mood-chip{
+  padding:10px 20px; border-radius:999px; border:2px solid var(--teal); background:transparent; color:var(--teal);
+  cursor:pointer; font-weight:600; font-size:0.87rem; transition:all .2s;
+}
+.mood-chip.active{ background:var(--teal); color:#fff; }
+
+/* ---------- INFO STRIP ---------- */
+.info-strip{
+  background:var(--ink); color:var(--cream); padding:60px 6vw;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:30px;
+}
+@media(max-width:800px){ .info-strip{ grid-template-columns:repeat(2,1fr);} }
+.info-strip .stat h3{ font-size:2.3rem; margin:0 0 4px; color:var(--marigold); }
+.info-strip .stat p{ margin:0; font-size:0.85rem; opacity:0.85; }
+
+footer{ text-align:center; padding:34px; color:#8a6f52; font-size:0.82rem; background:#f2e4c8; }
+
+/* ---------- MODAL / FULL DETAIL ---------- */
+.modal-backdrop{
+  position:fixed; inset:0; background:rgba(30,10,10,0.6); z-index:100;
+  display:none; align-items:flex-start; justify-content:center; backdrop-filter:blur(2px); overflow-y:auto; padding:40px 0 0;
+}
+.modal-backdrop.open{ display:flex; }
+.modal{
+  background:var(--cream); width:100%; max-width:900px; border-radius:24px; position:relative;
+  margin-bottom:40px; box-shadow:0 20px 60px rgba(0,0,0,0.4);
+  opacity:0; transform:translateY(30px); transition:all .35s cubic-bezier(.2,.8,.25,1);
+}
+.modal-backdrop.open .modal{ opacity:1; transform:translateY(0); }
+.modal-hero{ height:260px; position:relative; border-radius:24px 24px 0 0; overflow:hidden; }
+.modal-hero .place-grad{ background:linear-gradient(180deg, transparent 25%, rgba(20,10,10,0.8) 100%);}
+.modal-close{
+  position:absolute; top:16px; right:16px; width:38px; height:38px; border-radius:50%;
+  background:rgba(0,0,0,0.45); color:#fff; border:none; font-size:1.2rem; cursor:pointer; z-index:3;
+}
+.modal-hero-info{ position:absolute; bottom:16px; left:26px; color:#fff; z-index:2;}
+.modal-hero-info .place-tag{ margin-bottom:6px; }
+.modal-hero-info h2{ margin:0; font-size:2.1rem; }
+.modal-body{ padding:28px 32px 36px; }
+.detail-nav{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:22px; border-bottom:2px solid #ecdcb8; padding-bottom:14px;}
+.detail-nav button{
+  border:none; background:#f2e4c8; color:var(--ink); padding:8px 16px; border-radius:999px; font-weight:600;
+  font-size:0.82rem; cursor:pointer; transition:all .2s;
+}
+.detail-nav button.active{ background:var(--maroon); color:#fff; }
+.detail-panel{ display:none; animation:fadein .3s; }
+.detail-panel.active{ display:block; }
+@keyframes fadein{ from{opacity:0;} to{opacity:1;} }
+.modal-desc{ line-height:1.75; color:#4b3625; margin-bottom:18px; }
+.info-row{ display:flex; gap:10px; margin-bottom:10px; align-items:flex-start; }
+.info-row .ic{ font-size:1.1rem; }
+.info-row .lbl{ font-weight:700; color:var(--maroon); min-width:110px; font-size:0.85rem; }
+.info-row .val{ font-size:0.9rem; color:#4b3625; line-height:1.5; }
+.modal-grid{ display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+@media(max-width:640px){ .modal-grid{ grid-template-columns:1fr; } }
+.modal-block h4{ color:var(--purple); margin:0 0 12px; font-size:1.05rem; display:flex; align-items:center; gap:8px; }
+.mini-list{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;}
+.mini-list li{
+  background:#fff; border:1px solid #ecdcb8; border-radius:12px; padding:10px 14px;
+  font-size:0.88rem; display:flex; justify-content:space-between; align-items:center; gap:10px;
+}
+.mini-list .name{ font-weight:600; }
+.mini-list .meta{ color:#8a7256; font-size:0.78rem; }
+.chip-row{ display:flex; flex-wrap:wrap; gap:8px; }
+.chip{ background:var(--teal); color:#fff; padding:6px 13px; border-radius:999px; font-size:0.8rem; font-weight:500; }
+.chip.fest{ background:var(--magenta); }
+.stamp-cta{
+  margin-top:26px; width:100%; padding:15px; border-radius:14px; border:none; cursor:pointer;
+  background:var(--purple); color:#fff; font-weight:700; font-size:1rem;
+  display:flex; align-items:center; justify-content:center; gap:10px; transition:transform .15s;
+}
+.stamp-cta:active{ transform:scale(0.97); }
+.stamp-cta.done{ background:var(--marigold); color:var(--ink); }
+
+/* ---------- PASSPORT ---------- */
+.passport-backdrop{
+  position:fixed; inset:0; background:rgba(30,10,10,0.6); z-index:110; display:none; align-items:center; justify-content:center;
+}
+.passport-backdrop.open{ display:flex; }
+.passport-book{
+  width:min(480px, 90vw); max-height:85vh; overflow-y:auto; background:#f8ecd0;
+  border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,0.4); position:relative; padding:30px;
+  border:6px solid var(--maroon);
+  background-image:repeating-linear-gradient(0deg, transparent, transparent 34px, rgba(179,32,42,0.05) 35px);
+}
+.passport-book .modal-close{ background:var(--maroon); }
+.passport-title{ text-align:center; margin-bottom:6px; }
+.passport-title .mark{ font-size:2.4rem; display:block; margin-bottom:6px; }
+.passport-title h2{ margin:0; color:var(--maroon); }
+.passport-sub{ text-align:center; color:#8a7256; font-size:0.85rem; margin-bottom:22px; }
+.passport-progress{ height:8px; background:#ecdcb8; border-radius:999px; overflow:hidden; margin-bottom:26px; }
+.passport-progress-fill{ height:100%; background:var(--maroon); width:0%; transition:width .5s; }
+.stamp-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.stamp-slot{
+  aspect-ratio:1; border-radius:50%; border:2.5px dashed #cbb188; display:flex; align-items:center; justify-content:center;
+  flex-direction:column; text-align:center; padding:8px; font-size:0.72rem; color:#a8875e; position:relative;
+}
+.stamp-slot.filled{ border-style:solid; border-color:var(--maroon); color:var(--maroon); transform:rotate(-6deg); font-family:'Caveat',cursive; font-weight:700; }
+.stamp-slot.filled:nth-child(2n){ transform:rotate(5deg); }
+.stamp-slot .sname{ font-size:0.82rem; margin-top:2px; }
+.passport-empty-note{ text-align:center; color:#8a7256; font-size:0.85rem; margin-top:24px; font-style:italic;}
+</style>
+</head>
+
+<body>
+
+<div class="topbar" id="topbar">
+  <div class="logo"><span>Tanahun</span></div>
+  <button class="passport-btn" id="openPassport">📖 Passport <span class="passport-count" id="passportCount">0</span></button>
+</div>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="bunting" id="bunting"></div>
+  <div class="drift" style="top:18%; font-size:22px; animation-duration:10s;">🦅</div>
+  <div class="drift" style="top:30%; font-size:16px; animation-duration:15s; animation-delay:1s;">🪁</div>
+  <div class="drift" style="top:45%; font-size:14px; animation-duration:15s; animation-delay:1s;">🍃</div>
+  <svg class="hills" viewBox="0 0 1440 320" preserveAspectRatio="none" style="height:36vh;">
+    <path fill="#7a2e3d" d="M0,192L120,181.3C240,171,480,149,720,160C960,171,1200,213,1320,234.7L1440,256L1440,320L0,320Z"></path>
+    <path fill="#5B2C6F" d="M0,256L160,240C320,224,640,192,960,197.3C1280,203,1440,235,1440,235L1440,320L0,320Z" opacity="0.9"></path>
+  </svg>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="eyebrow">Gandaki Province · Nepal</div>
+    <h1>TANAHUN</h1>
+    <p class="tagline">Vyas Bhumi, Adi Kabi Bhanubhakta acharaya Terraced hills,deep vallys two rivers, ancient temples, hilltop bazaars , and a calendar full of festivals and dance.</p>
+  </div>
+  <div class="scroll-cue"><span>Scroll to wander</span><div class="line"></div></div>
+</section>
+
+<section class="section" id="places">
+  <div class="section-head">
+    <div class="kicker">The Front Porch</div>
+    <h2>Places that make Tanahun, Tanahun</h2>
+    <p>Tap a place for the full history, culture, festivals, where to stay, and what's nearby.</p>
+  </div>
+  <div class="carousel-wrap" id="carouselWrap">
+    <div class="carousel-track" id="carousel"></div>
+  </div>
+  <div class="carousel-controls">
+    <button id="prevBtn">←</button>
+    <button class="play-pill" id="playPause">⏸ Pause</button>
+    <button id="nextBtn">→</button>
+  </div>
+</section>
+
+<section class="culture-band">
+  <div class="section-head">
+    <div class="kicker">Living Traditions</div>
+    <h2>Festivals &amp; Dances of Tanahun</h2>
+    <p>Tanahun's ridges and riverbanks come alive year-round with festivals and folk dances carried by Magar, Gurung, Brahmin, and Chhetri communities alike.</p>
+  </div>
+  <div class="culture-grid" id="cultureGrid"></div>
+</section>
+
+<section class="section" id="mood">
+  <div class="section-head">
+    <div class="kicker">Not Sure Where to Start?</div>
+    <h2>Tell us your mood</h2>
+    <p>Pick a feeling — we'll point you toward the right ridge, river, or ruin.</p>
+  </div>
+  <div class="mood-row" id="moodRow"></div>
+  <div id="moodResult" style="margin-top:22px;"></div>
+</section>
+
+<div class="info-strip">
+  <div class="stat"><h3>8+</h3><p>Signature places to explore</p></div>
+  <div class="stat"><h3>184–2134m</h3><p>Elevation range, plains to hilltop</p></div>
+  <div class="stat"><h3>2</h3><p>Major rivers carving the valley — Seti &amp; Madi</p></div>
+  <div class="stat"><h3>49km</h3><p>From Damauli to Pokhara</p></div>
+</div>
+
+<footer>Built as a wandering-friendly prototype for Tanahun district tourism · Photos are color placeholders — swap in real shots of each place.</footer>
+
+<div class="modal-backdrop" id="modalBackdrop"><div class="modal" id="modalContent"></div></div>
+
+<div class="passport-backdrop" id="passportBackdrop">
+  <div class="passport-book">
+    <button class="modal-close" id="closePassport">✕</button>
+    <div class="passport-title"><span class="mark">🛂</span><h2>Tanahun Passport</h2></div>
+    <div class="passport-sub" id="passportSub">Visit places (in the app) to collect their stamp.</div>
+    <div class="passport-progress"><div class="passport-progress-fill" id="progressFill"></div></div>
+    <div class="stamp-grid" id="stampGrid"></div>
+    <div class="passport-empty-note" id="passportNote">No stamps yet — open a place and tap "Stamp my passport".</div>
+  </div>
+</div>
+
+<script>
+const FLAG_COLORS = ["#B3202A","#F4B400","#128A8C","#C6316B","#5B2C6F"];
+
+const PLACES = [
+{ id:"bandipur", grad:"linear-gradient(160deg,#b3202a,#e8871e)", img:"images/bandipur.jpg", tag:"Hilltop Heritage Town", name:"Bandipur",
+  desc:"A cobblestoned Newar trading town frozen in time on a ridge above the valley — carved wooden windows, sunrise views over the Himalaya, and no cars in the old bazaar.",
+  history:"Built by Newar traders in the 18th–19th century as a stop on the India–Tibet trade route, Bandipur grew wealthy on salt, cotton, and grain. When the highway bypassed it in the 1970s, the town's fortunes faded — but that same isolation preserved its brick-and-timber townscape almost untouched.",
+  bestTime:"Oct–Dec &amp; Mar–Apr for clear mountain views; avoid peak monsoon (Jul–Aug) for hazy skies.",
+  reach:"3–4 hr drive from Kathmandu or Pokhara to Bandipur bus park, then a short walk or jeep up to the bazaar.",
+  festivals:["Bisket Jatra echoes", "Newar Ghatasthapana rituals"],
+  hotels:[["Bandipur Mountain Resort","Hilltop view rooms"],["The Old Inn","Restored heritage house"],["Nostalgia Newari Lodge","Local Newari kitchen"]],
+  nearby:["Tundikhel viewpoint","Thani Mai Temple","Siddha Cave"], mood:["culture","peace"]
+},
+{ id:"devghat", grad:"linear-gradient(160deg,#2e9aa8,#173a40)", img:"images/namuna.jpeg" ,tag:"Sacred River Confluence", name:"Devghat",
+  desc:"Where the Seti and Trishuli rivers meet — one of Nepal's holiest sites, packed with temples and ashrams, and thronged with pilgrims during Maghe Sankranti.",
+  history:"Devghat has drawn ascetics and pilgrims for centuries as a tirtha (sacred crossing) at the meeting of two rivers, comparable in spiritual weight to India's Triveni Sangam. Rishis and sages are said to have retreated here, and cremation and ritual bathing rites continue today.",
+  bestTime:"Maghe Sankranti (mid-January) for the biggest pilgrimage gathering; otherwise year-round for quiet temple visits.",
+  reach:"Short drive/local bus from Damauli bazaar or from the Mugling–Narayanghat highway.",
+  festivals:["Maghe Sankranti mela","Shraddha (ancestor rites) ceremonies"],
+  hotels:[["Devghat Yatri Niwas","Pilgrim lodge"],["River View Lodge","Riverside rooms"]],
+  nearby:["Rishi Parashar's Ashram","Kaligandaki confluence ghats"], mood:["culture","peace"]
+},
+{ id:"manungkot", grad:"linear-gradient(160deg,#7a9a2e,#2e3d12)",img:"images/manungkot.jpeg", tag:"Himalayan Viewpoint", name:"Manung Kot",
+  desc:"A hill station with one of the widest mountain panoramas around — Dhaulagiri to Manaslu, Machhapuchhre, Annapurna, Lamjung — plus the whole Damauli valley below.",
+  history:"A traditional lookout ridge used by nearby villages for generations, more recently developed with viewing platforms as sunrise-hike tourism grew around Pokhara and Bandipur.",
+  bestTime:"Clear pre-monsoon and post-monsoon months (Oct–Apr); arrive before sunrise for the best mountain light.",
+  reach:"Hike or jeep track from nearby villages around Bandipur/Damauli; often combined as an early-morning add-on to a Bandipur stay.",
+  festivals:["Local Chandi Purnima hill gatherings"],
+  hotels:[["Manung Kot Homestay","Family-run, sunrise deck"],["Hillview Guesthouse","Budget rooms"]],
+  nearby:["Damauli Bazaar","Seti River"], mood:["peace","adventure"]
+},
+{ id:"vyascave", grad:"linear-gradient(160deg,#8a6a4a,#3a2510)",img:"images/vyascave.webp", tag:"Ancient Shrine Cave", name:"Vyas Cave",
+  desc:"A limestone cave shrine linked to the sage Ved Vyas, tucked into the hillside near Damauli — cool, quiet, and steeped in old stories.",
+  history:"Local tradition holds that the sage Ved Vyas — traditionally credited with compiling the Mahabharata and the Vedas — meditated in this cave, giving the site its name and its pilgrimage status.",
+  bestTime:"Dry season (Oct–May); the cave interior stays cool year-round.",
+  reach:"Short drive from Damauli bazaar, combinable with a Devghat visit in the same day.",
+  festivals:["Guru Purnima observances"],
+  hotels:[["Byas Guesthouse Damauli","Closest stay to the cave"]],
+  nearby:["Devghat","Damauli Bazaar"], mood:["culture","peace"]
+},
+{ id:"chhimkeshwari", grad:"linear-gradient(160deg,#a8406a,#3a1428)",img:"images/chhimkeshwari.jpg", tag:"Pagoda on the Ridge", name:"Chhimkeshwari Temple",
+  desc:"A rebuilt pagoda-style temple on Chhimkeshwari hill with a dedicated trekking path — half pilgrimage, half panoramic hike.",
+  history:"An old hilltop shrine rebuilt in pagoda style with support from the local rural municipality and Gandaki Province, now positioned as both a religious site and a scenic day hike.",
+  bestTime:"Cooler months (Oct–Mar) for the uphill walk; early morning for mist-and-sun views.",
+  reach:"Trailhead near Aanbukhaireni, off the Prithvi Highway between Mugling and Damauli.",
+  festivals:["Dashain hilltop pujas","Teej gatherings"],
+  hotels:[["Chhimkeshwari Homestay","Trailside rooms"]],
+  nearby:["Aanbukhaireni Bazaar","Marshyangdi River"], mood:["culture","adventure"]
+},
+{ id:"chhabdibarahi", grad:"linear-gradient(160deg,#c9962e,#4a3410)", img:"images/chhabdibarahi.jpg",tag:"Historic Magar Site", name:"Chhabdi Barahi Temple",
+  desc:"A medieval-era temple close to the old Tanahusur Durbar, deep in Magar cultural country — forts, folklore, and organic village food.",
+  history:"Tied to the medieval Tanahu kingdom, this temple and the nearby Tanahusur Durbar ruins mark the district's pre-unification history as an independent hill principality before it was absorbed into unified Nepal.",
+  bestTime:"Year-round; local festival days bring extra color and free-flowing Magar hospitality.",
+  reach:"Drive from Damauli into the Tanahusur/Magar village belt; local guides recommended for the durbar ruins.",
+  festivals:["Magar Bhume Puja","Local Barahi jatra"],
+  hotels:[["Tanahusur Homestay","Magar-run homestay"]],
+  nearby:["Tanahusur Durbar ruins","Local Magar villages"], mood:["culture","food"]
+},
+{ id:"damauli", grad:"linear-gradient(160deg,#3a6ac9,#12183a)",img:"images/damauli.jpg", tag:"District Headquarters", name:"Damauli Bazaar",
+  desc:"The lively gateway town of Tanahun, sitting where the Seti and Madi rivers converge — markets, tea shops, and the jumping-off point for everywhere else.",
+  history:"Damauli grew as the administrative headquarters of Tanahun district, its position at a river confluence and along the highway corridor making it the natural hub for trade and transit across the district.",
+  bestTime:"Year-round travel hub; best used as a base rather than a single-day stop.",
+  reach:"On the Prithvi Highway, roughly midway between Kathmandu and Pokhara, about 49km from Pokhara.",
+  festivals:["Dashain &amp; Tihar street celebrations","Local mela fairs"],
+  hotels:[["Hotel Damauli Palace","Central, full service"],["Sundar Homestay","Local family stay"]],
+  nearby:["Seti-Madi confluence","Local bazaar street food"], mood:["food","culture"]
+},
+{ id:"setirafting", grad:"linear-gradient(160deg,#128A8C,#0a2e30)",img:"images/rafting.jpg", tag:"Whitewater &amp; Camps", name:"Seti &amp; Madi Rivers",
+  desc:"Rapids, riverside tented camps, and a cool breeze off two rivers — the adventure heart of Tanahun, with Kurintar's cable car access nearby.",
+  history:"The Seti and Madi rivers have long shaped Tanahun's farmland and settlement patterns; in recent decades stretches of both have opened up for organized whitewater rafting and riverside camping tourism.",
+  bestTime:"Oct–Dec and Mar–May for rafting water levels; monsoon season rapids are for experienced rafters only.",
+  reach:"Access points near Damauli and Kurintar, off the Prithvi Highway.",
+  festivals:["Riverside Maghe Sankranti bathing"],
+  hotels:[["Riverside Tented Camp","Overnight rafting camp"],["Rafting Base Camp Lodge","Basic riverside rooms"]],
+  nearby:["Kurintar cable-car access","Bandipur"], mood:["adventure"]
+}
+];
+
+const FESTIVALS = [
+  { icon:"🪔", tag:"January", name:"Maghe Sankranti at Devghat", desc:"Thousands gather at the sacred Seti–Trishuli confluence to bathe in the winter-solstice waters, share ghee and sweet potatoes, and mark the sun's turn northward." },
+  { icon:"💃", tag:"Folk Dance", name:"Ghatu Dance", desc:"A slow, trance-like Gurung dance performed by young women over several days, telling stories of legendary kings and queens through song and movement." },
+  { icon:"🌺", tag:"Aug–Sep", name:"Teej", desc:"Women across Tanahun dress in red saris, fast, sing, and dance in temple courtyards for marital happiness and family wellbeing — one of the year's most colorful days." },
+  { icon:"🥁", tag:"Folk Dance", name:"Sorathi Dance", desc:"A Gurung storytelling dance performed by masked dancers depicting a legendary queen's tale, accompanied by madal drums and folk songs." },
+  { icon:"🏮", tag:"Sep–Oct", name:"Dashain", desc:"Nepal's biggest festival — tika, jamara, family reunions, and kite-flying skies over Damauli and every hill village in the district." },
+  { icon:"🕺", tag:"Magar Culture", name:"Bhume Puja", desc:"A Magar earth-worship festival giving thanks to the land before planting season, celebrated with community feasts around Chhabdi Barahi and Tanahusur villages." },
+  { icon:"🪈", tag:"Oct–Nov", name:"Tihar", desc:"Five days honoring crows, dogs, cows, and siblings, lit up with oil lamps and marigold garlands (the same marigold you see across this site's colors)." },
+  { icon:"🎭", tag:"Folk Dance", name:"Deuda Dance", desc:"A communal circle dance with call-and-response folk singing, performed at festivals and harvest gatherings across the hills of Tanahun." }
+];
+
+let visited = new Set();
+let activeMood = null;
+let activeTab = "overview";
+const cardWidth = 322; // 300 + gap
+let track, autoTimer, offset = 0, playing = true;
+
+function buildFlags(){
+  const el = document.getElementById("bunting");
+  let html = "";
+  for(let i=0;i<24;i++){ html += `<div class="flag" style="background:${FLAG_COLORS[i%FLAG_COLORS.length]}"></div>`; }
+  el.innerHTML = html;
+}
+
+function cardHTML(p){
+  return `
+    <div class="place-card" data-id="${p.id}">
+      <div class="place-img" style="background:${p.grad}"></div>
+      <div class="place-grad"></div>
+      <div class="stamped-badge ${visited.has(p.id)?'show':''}" data-badge="${p.id}">✓</div>
+      <div class="place-info">
+        <span class="place-tag">${p.tag}</span>
+        <h3>${p.name}</h3>
+        <p>${p.desc.slice(0,58)}…</p>
+      </div>
+    </div>`;
+}
+
+function renderCarousel(){
+  track = document.getElementById("carousel");
+  // triple the set for seamless infinite loop
+  const all = [...PLACES, ...PLACES, ...PLACES];
+  track.innerHTML = all.map(cardHTML).join("");
+  track.querySelectorAll(".place-card").forEach(el=>{
+    el.onclick = ()=>openModal(el.dataset.id);
+  });
+  offset = PLACES.length * cardWidth; // start in the middle copy
+  track.style.transform = `translateX(${-offset}px)`;
+}
+
+function refreshBadges(){
+  document.querySelectorAll(".stamped-badge").forEach(b=>{
+    b.classList.toggle("show", visited.has(b.dataset.badge));
+  });
+}
+
+function autoStep(){
+  offset += 0.6;
+  const setWidth = PLACES.length * cardWidth;
+  if(offset >= setWidth*2){ offset -= setWidth; }
+  track.style.transform = `translateX(${-offset}px)`;
+  autoTimer = requestAnimationFrame(autoStep);
+}
+function startAuto(){ if(!playing) return; cancelAnimationFrame(autoTimer); autoTimer = requestAnimationFrame(autoStep); }
+function stopAuto(){ cancelAnimationFrame(autoTimer); }
+
+function jump(dir){
+  offset += dir*cardWidth;
+  const setWidth = PLACES.length * cardWidth;
+  if(offset >= setWidth*2) offset -= setWidth;
+  if(offset < setWidth) offset += setWidth;
+  track.style.transition = "transform .5s ease";
+  track.style.transform = `translateX(${-offset}px)`;
+  setTimeout(()=> track.style.transition = "", 500);
+}
+
+function renderCulture(){
+  const grid = document.getElementById("cultureGrid");
+  grid.innerHTML = FESTIVALS.map(f=>`
+    <div class="culture-card">
+      <div class="culture-thumb" style="background:linear-gradient(160deg, rgba(255,255,255,0.12), rgba(0,0,0,0.15))">${f.icon}</div>
+      <div class="culture-body">
+        <span class="ctag">${f.tag}</span>
+        <h3>${f.name}</h3>
+        <p>${f.desc}</p>
+      </div>
+    </div>`).join("");
+}
+
+const TABS = [
+  {key:"overview", label:"Overview"},
+  {key:"culture", label:"History & Culture"},
+  {key:"visit", label:"Plan Your Visit"},
+  {key:"stay", label:"Stay & Nearby"}
+];
+
+function openModal(id){
+  const p = PLACES.find(x=>x.id===id);
+  activeTab = "overview";
+  renderModal(p);
+  document.getElementById("modalBackdrop").classList.add("open");
+  stopAuto(); playing=false; document.getElementById("playPause").textContent = "▶ Play";
+}
+
+function renderModal(p){
+  const isStamped = visited.has(p.id);
+  const modal = document.getElementById("modalContent");
+  modal.innerHTML = `
+    <div class="modal-hero" style="background:${p.grad}">
+      <div class="place-grad"></div>
+      <button class="modal-close" id="modalCloseBtn">✕</button>
+      <div class="modal-hero-info"><span class="place-tag">${p.tag}</span><h2>${p.name}</h2></div>
+    </div>
+    <div class="modal-body">
+      <div class="detail-nav" id="detailNav">
+        ${TABS.map(t=>`<button data-tab="${t.key}" class="${t.key===activeTab?'active':''}">${t.label}</button>`).join("")}
+      </div>
+
+      <div class="detail-panel ${activeTab==='overview'?'active':''}" data-panel="overview">
+        <p class="modal-desc">${p.desc}</p>
+        <div class="modal-block">
+          <h4>🎊 Festivals tied to this place</h4>
+          <div class="chip-row">${p.festivals.map(f=>`<span class="chip fest">${f}</span>`).join("")}</div>
+        </div>
+      </div>
+
+      <div class="detail-panel ${activeTab==='culture'?'active':''}" data-panel="culture">
+        <p class="modal-desc">${p.history}</p>
+      </div>
+
+      <div class="detail-panel ${activeTab==='visit'?'active':''}" data-panel="visit">
+        <div class="info-row"><span class="ic">🗓️</span><span class="lbl">Best time</span><span class="val">${p.bestTime}</span></div>
+        <div class="info-row"><span class="ic">🚙</span><span class="lbl">How to reach</span><span class="val">${p.reach}</span></div>
+      </div>
+
+      <div class="detail-panel ${activeTab==='stay'?'active':''}" data-panel="stay">
+        <div class="modal-grid">
+          <div class="modal-block">
+            <h4>🏨 Nearby stays</h4>
+            <ul class="mini-list">${p.hotels.map(h=>`<li><span class="name">${h[0]}</span><span class="meta">${h[1]}</span></li>`).join("")}</ul>
+          </div>
+          <div class="modal-block">
+            <h4>📍 Nearby attractions</h4>
+            <div class="chip-row">${p.nearby.map(n=>`<span class="chip">${n}</span>`).join("")}</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="stamp-cta ${isStamped?'done':''}" id="stampBtn">
+        ${isStamped ? '🎉 Stamped ✓' : '📮 Stamp my passport'}
+      </button>
+    </div>
+  `;
+  document.getElementById("modalCloseBtn").onclick = closeModal;
+  document.getElementById("stampBtn").onclick = ()=>stampPlace(p.id);
+  document.getElementById("detailNav").querySelectorAll("button").forEach(btn=>{
+    btn.onclick = ()=>{ activeTab = btn.dataset.tab; renderModal(p); };
+  });
+}
+
+function closeModal(){
+  document.getElementById("modalBackdrop").classList.remove("open");
+  playing = true; document.getElementById("playPause").textContent = "⏸ Pause"; startAuto();
+}
+
+function stampPlace(id){
+  if(!visited.has(id)){ visited.add(id); }
+  const p = PLACES.find(x=>x.id===id);
+  renderModal(p);
+  refreshBadges();
+  updatePassportUI();
+  const btn = document.getElementById("openPassport");
+  btn.style.transform = "scale(1.15)";
+  setTimeout(()=>btn.style.transform="scale(1)", 220);
+}
+
+function updatePassportUI(){
+  document.getElementById("passportCount").textContent = visited.size;
+  const grid = document.getElementById("stampGrid");
+  grid.innerHTML = PLACES.map(p=>{
+    const filled = visited.has(p.id);
+    return `<div class="stamp-slot ${filled?'filled':''}">${filled? '✓':''}<span class="sname">${p.name}</span></div>`;
+  }).join("");
+  document.getElementById("progressFill").style.width = (visited.size/PLACES.length*100)+"%";
+  document.getElementById("passportNote").style.display = visited.size===0 ? "block":"none";
+}
+
+const MOODS = {adventure:"Adventure", peace:"Peace & Views", culture:"Culture & History", food:"Food & Village Life"};
+function renderMoods(){
+  const row = document.getElementById("moodRow");
+  row.innerHTML = Object.keys(MOODS).map(key=>`<button class="mood-chip ${activeMood===key?'active':''}" data-mood="${key}">${MOODS[key]}</button>`).join("");
+  row.querySelectorAll("button").forEach(btn=>{
+    btn.onclick = ()=>{ activeMood = activeMood===btn.dataset.mood ? null : btn.dataset.mood; renderMoods(); renderMoodResult(); };
+  });
+}
+function renderMoodResult(){
+  const box = document.getElementById("moodResult");
+  if(!activeMood){ box.innerHTML=""; return; }
+  const matches = PLACES.filter(p=>p.mood.includes(activeMood));
+  box.innerHTML = `<div class="mood-row">` + matches.map(p=>`
+    <div class="place-card" style="flex:0 0 260px; height:150px;" data-id="${p.id}">
+      <div class="place-img" style="background:${p.grad}"></div>
+      <div class="place-grad"></div>
+      <div class="place-info"><h3 style="font-size:1.1rem;">${p.name}</h3></div>
+    </div>`).join("") + `</div>`;
+  box.querySelectorAll(".place-card").forEach(el=>{ el.onclick = ()=>openModal(el.dataset.id); });
+}
+
+document.getElementById("modalBackdrop").addEventListener("click",(e)=>{ if(e.target.id==="modalBackdrop") closeModal(); });
+document.getElementById("openPassport").onclick = ()=> { document.getElementById("passportBackdrop").classList.add("open"); stopAuto(); };
+document.getElementById("closePassport").onclick = ()=> { document.getElementById("passportBackdrop").classList.remove("open"); startAuto(); };
+document.getElementById("passportBackdrop").addEventListener("click",(e)=>{ if(e.target.id==="passportBackdrop"){ e.currentTarget.classList.remove("open"); startAuto(); } });
+
+document.getElementById("prevBtn").onclick = ()=> jump(-1);
+document.getElementById("nextBtn").onclick = ()=> jump(1);
+document.getElementById("playPause").onclick = (e)=>{
+  playing = !playing;
+  e.target.textContent = playing ? "⏸ Pause" : "▶ Play";
+  if(playing) startAuto(); else stopAuto();
+};
+document.getElementById("carouselWrap").addEventListener("mouseenter", ()=>{ if(playing) stopAuto(); });
+document.getElementById("carouselWrap").addEventListener("mouseleave", ()=>{ if(playing) startAuto(); });
+
+window.addEventListener("scroll", ()=>{
+  document.getElementById("topbar").classList.toggle("solid", window.scrollY > 60);
+});
+
+buildFlags();
+renderCarousel();
+renderCulture();
+renderMoods();
+updatePassportUI();
+startAuto();
+</script>
+</body>
+</html>
