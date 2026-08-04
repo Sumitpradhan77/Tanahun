@@ -169,6 +169,16 @@ const FESTIVALS = [
     tag: "January",
     name: "Maghe Sankranti at Devghat",
     desc: "Thousands gather at the sacred Seti–Trishuli confluence to bathe in the winter-solstice waters, share ghee and sweet potatoes, and perform ancestral rites. It's one of Nepal's largest single-day pilgrimages."
+    id: "setirafting",
+    grad: "linear-gradient(160deg, #128A8C, #0a2e30)",
+    img: "images/rafting.webp",
+    fallbackImg: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23128A8C' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='24' fill='%23fff' text-anchor='middle' dominant-baseline='central'%3ESeti %26 Madi Rivers%3C/text%3E%3C/svg%3E",
+    tag: "Whitewater & Camps",
+    name: "Seti & Madi Rivers",
+    desc: "Rapids, riverside tented camps, and a cool breeze off two rivers — the adventure heart of Tanahun, with Kurintar's cable car access nearby.",
+    history: "The Seti and Madi rivers have long shaped Tanahun's farmland and settlement patterns; in recent decades stretches of both have opened up for organized whitewater rafting and riverside camping, attracting adventure travelers from across Nepal and beyond.",
+    bestTime: "October–December and March–May for ideal rafting water levels; monsoon season rapids are for experienced rafters only.",
+    
   },
   {
     icon: "💃",
